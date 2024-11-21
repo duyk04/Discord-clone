@@ -30,7 +30,7 @@ export const NavigationSidebar = async () => {
     return (
         <div
             className="space-y-4 flex flex-col items-center
-            h-full text-primary w-full dark:bg-[#1E1F22] py-3"
+            h-screen text-primary w-full dark:bg-[#1E1F22] py-3"
         >
             <NavigatorAction />
             <Separator
@@ -49,7 +49,7 @@ export const NavigationSidebar = async () => {
                 ))}
             </ScrollArea>
             <div className="pb-3 mt-auto flex flex-col items-center gap-y-4">
-                <ModeToggle/>
+                <ModeToggle />
                 <UserButton
                     afterSignOutUrl="/"
                     // afterSwitchSessionUrl="/"
