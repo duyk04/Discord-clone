@@ -103,7 +103,7 @@ export const ServerHeader = ({
                             <Trash className="h-4 w-4 ml-auto"/>
                         </DropdownMenuItem>
                     )}
-                    {isAdmin && (
+                    {!isAdmin && (
                         <DropdownMenuItem
                             className="text-rose-500 px-3 py-2 text-sm cursor-pointer
                             hover:bg-rose-500 hover:text-white
