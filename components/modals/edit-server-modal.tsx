@@ -74,8 +74,8 @@ export const EditServerModal = () => {
 
             setTimeout(() => {
                 onClose();
-              }, 1000);
-            form.reset();
+              }, 500);
+            // form.reset();
             router.refresh();
         } catch (error) {
             console.error(error);
@@ -83,7 +83,7 @@ export const EditServerModal = () => {
     }
 
     const handleClose = () => {
-        form.reset();
+        // form.reset();
         onClose();
     }
 
@@ -91,7 +91,7 @@ export const EditServerModal = () => {
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
             <DialogContent className="bg-white text-black p-0 overflow-hidden">
                 <DialogHeader className="pt-8 px-6">
-                    <DialogTitle className="text-2xl text-center">
+                    <DialogTitle className="text-2xl text-center font-bold">
                         Customize your server
                     </DialogTitle>
                     <DialogDescription className="text-center text-zinc-500">
