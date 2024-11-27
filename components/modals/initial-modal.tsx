@@ -55,10 +55,10 @@ export const InitialModal = () => {
 
     const isLoading = form.formState.isSubmitting;
 
-    const onSubmit = async (value: z.infer<typeof formSchema>) => {
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
         // console.log(value);
         try{
-            await axios.post("/api/servers", value);
+            await axios.post("/api/servers", values);
 
             form.reset();
             router.refresh();
@@ -111,7 +111,7 @@ export const InitialModal = () => {
                                     <FormItem>
                                         <FormLabel className="uppercase text-xs font-bold text-zinc-500
                                         dark:text-secondary/70">
-                                            Sever name
+                                            Server name
                                         </FormLabel>
                                         <FormControl>
                                             <Input 
