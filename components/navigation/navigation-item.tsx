@@ -47,6 +47,7 @@ export const NavigationItem = ({
                         fill
                         src={imageUrl}
                         alt="Channel"
+                        sizes="48px"
                         className="hover:scale-105 transition-transform"
                     />
                 </div>
