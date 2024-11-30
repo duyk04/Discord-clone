@@ -4,13 +4,14 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(
     req: Request,
-    context: { params: { memberId: string } } 
+    context: { params: { memberId: string } }
 ) {
+
     try {
         const profile = await currentProfile();
         const { searchParams } = new URL(req.url);
         const serverId = searchParams.get("serverId");
-        const { params} = await context;
+        const { params } = await context;
 
         if (!profile) {
             return new NextResponse("Unauthorized", { status: 401 });
@@ -24,15 +25,15 @@ export async function DELETE(
             return new NextResponse("Member ID missing", { status: 400 });
         }
 
-        
+
         const server = await db.server.update({
-            where:{
+            where: {
                 id: serverId,
                 profileId: profile.id
             },
-            data:{
-                members:{
-                    deleteMany:{
+            data: {
+                members: {
+                    deleteMany: {
                         id: params.memberId,
                         profileId: {
                             not: profile.id
@@ -40,12 +41,12 @@ export async function DELETE(
                     }
                 }
             },
-            include:{
-                members:{
-                    include:{
+            include: {
+                members: {
+                    include: {
                         profile: true
                     },
-                    orderBy:{
+                    orderBy: {
                         role: "asc"
                     }
                 },
@@ -98,7 +99,7 @@ export async function PATCH(
                                 not: profile.id
                             }
                         },
-                        data:{
+                        data: {
                             role
                         }
                     }
