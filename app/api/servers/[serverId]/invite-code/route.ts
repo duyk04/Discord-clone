@@ -5,18 +5,15 @@ import { NextResponse } from "next/server";
 
 export async function PATCH(
     req: Request,
-    // { params }: { params: { serverId: string } }
-    context: { params: { serverId: string } }
+    { params }: { params: Promise<{ serverId: string }> }
 ){
     try {
         const profile = await currentProfile();
+        const { serverId } = await params;
 
         if(!profile){
             return new NextResponse("Unauthorized", {status: 401});
         }
-
-        const { params } = context;
-        const { serverId } = await params; // Thêm await ở đây
 
         if(!serverId){
             return new NextResponse("Sever ID Missing", {status: 404});
