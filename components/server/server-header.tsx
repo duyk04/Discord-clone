@@ -38,7 +38,7 @@ export const ServerHeader = ({
         <div>
             <DropdownMenu>
                 <DropdownMenuTrigger className="focus:outline-none" asChild>
-                    <button className="w-full text-md font-semibold px-3 py-2 flex items-centerh-12
+                    <button className="w-full text-md font-semibold px-3 py-3 flex items-center h-12
                      dark:border-neutral-800 border-b-2 hover:bg-zinc-700/10
                      dark:hover:bg-zinc-700/50 transition">
                         {server.name}
