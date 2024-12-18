@@ -13,6 +13,7 @@ import {
     FormItem
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useModal } from "@/hooks/use-modal-store";
 
 interface ChatInputProps {
     apiUrl: string;
@@ -31,6 +32,7 @@ export const ChatInput = ({
     name,
     type
 }: ChatInputProps) => {
+    const { onOpen } = useModal();
     const form = useForm<z.infer<typeof fromSchema>>({
         resolver: zodResolver(fromSchema),
         defaultValues: {
@@ -47,7 +49,7 @@ export const ChatInput = ({
                 url: apiUrl,
                 query,
             });
-            
+
             await axios.post(url, values);
         } catch (error) {
             console.error(error);
@@ -65,7 +67,7 @@ export const ChatInput = ({
                                 <div className="relative p-4 pb-6">
                                     <button
                                         type="button"
-                                        onClick={() => { }}
+                                        onClick={() => onOpen("messageFile", { apiUrl, query })}
                                         className="absolute top-7 left-8 h-[24px] w-[24px] 
                                         bg-zinc-500 dark:bg-zinc-400 hover:bg-zinc-600
                                         dark:hover:bg-zinc-300 rounded-full transition p-1 
@@ -81,7 +83,7 @@ export const ChatInput = ({
                                         {...field}
                                     />
                                     <div className="absolute top-7 right-8">
-                                        <Smile/>
+                                        <Smile />
                                     </div>
                                 </div>
                             </FormControl>

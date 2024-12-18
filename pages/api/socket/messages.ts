@@ -29,8 +29,12 @@ export default async function handler(
 
         }
 
-        if (!content) {
-            return res.status(400).json({ message: "Content is missing" });
+        if (!content || typeof content !== "string") {
+            return res.status(400).json({ message: "Invalid or missing content" });
+        }
+
+        if (fileUrl && typeof fileUrl !== "string") {
+            return res.status(400).json({ message: "Invalid file URL" });
         }
 
         const server = await db.server.findFirst({
