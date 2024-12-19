@@ -16,7 +16,7 @@ export const FileUpload = ({
     value,
     endpoint
 }: FileUploadProps) => {
-    const filetype = value?.split(".").pop();
+    const filetype = value?.split(".").pop(); //error here
     
     if (value && filetype !== "pdf") {
         console.log("img");
