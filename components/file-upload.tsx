@@ -20,6 +20,7 @@ export const FileUpload = ({
 }: FileUploadProps) => {
     const [contentType, setContentType] = useState<string | null>(null);
 
+    // sửa lỗi không đọc đươc định dạng file khi upload và nhận về
     useEffect(() => {
         const fetchContentType = async () => {
             if (value) {
