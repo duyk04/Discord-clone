@@ -1,12 +1,16 @@
 "use client";
 
 import { Fragment } from "react";
+import { format } from "date-fns";
 import { Member, Message, Profile } from "@prisma/client";
 import { Loader2, ServerCrash } from "lucide-react";
 
+import { useChatQuery } from "@/hooks/use-chat-query";
+
+import { ChatItem } from "./chat-item";
 import { ChatWelcome } from "./chat-welcome";
 
-import { useChatQuery } from "@/hooks/use-chat-query";
+const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
 type MessageWithMemberWithProfile = Message & {
     member: Member & {
@@ -54,7 +58,7 @@ export const ChatMessages = ({
     if (status === "pending") {
         return (
             <div className="flex-1 flex flex-col items-center justify-center">
-                <Loader2 className="w-7 h-7 text-zinc-500 animate-spin my-4"/>
+                <Loader2 className="w-7 h-7 text-zinc-500 animate-spin my-4" />
                 <p className="text-zinc-500 text-xs dark:text-zinc-400">
                     Loading messages...
                 </p>
@@ -65,7 +69,7 @@ export const ChatMessages = ({
     if (status === "error") {
         return (
             <div className="flex-1 flex flex-col items-center justify-center">
-                <ServerCrash className="w-7 h-7 text-zinc-500 my-4"/>
+                <ServerCrash className="w-7 h-7 text-zinc-500 my-4" />
                 <p className="text-zinc-500 text-xs dark:text-zinc-400">
                     Something went wrong!
                 </p>
@@ -83,9 +87,20 @@ export const ChatMessages = ({
                 {data?.pages?.map((group, index) => (
                     <Fragment key={index}>
                         {group.items.map((message: MessageWithMemberWithProfile) => (
-                            <div key={message.id} className="flex items-center space-x-2">
-                                {message.content}
-                            </div>
+                            <ChatItem
+                                key={message.id}
+                                id={message.id}
+                                currentMember={member}
+                                member={message.member}
+                                content={message.content}
+                                fileUrl={message.fileUrl}
+                                deleted={message.deleted}
+                                timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
+                                isUpdate={message.updatedAt !== message.createdAt}
+                                socketUrl={socketUrl}
+                                socketQuery={socketQuery}
+                            />
+
                         ))}
                     </Fragment>
                 ))}
