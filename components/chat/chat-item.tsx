@@ -83,15 +83,29 @@ export const ChatItem = ({
         }
     })
 
+    const isLoading = form.formState.isSubmitting;
+
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        console.log(values);
+        try {
+            const url = qs.stringifyUrl({
+                url: `${socketUrl}/${id}`,
+                query: socketQuery
+            });
+
+            await axios.patch(url, values);
+            form.reset();
+            setIsEditing(false);
+        } catch (error) {
+            console.error(error);
+        }
+    }
     useEffect(() => {
         form.reset({
             content: content
         });
     }, [content]);
 
-    const onSubmit = (values) => {
-        console.log(values);
-    }
 
     useEffect(() => {
         const fetchContentType = async () => {
@@ -182,6 +196,7 @@ export const ChatItem = ({
                                 onSubmit={form.handleSubmit(onSubmit)}
                             >
                                 <FormField
+                                    disabled={isLoading}
                                     control={form.control}
                                     name="content"
                                     render={({ field }) => (
@@ -198,7 +213,7 @@ export const ChatItem = ({
                                         </FormItem>
                                     )}
                                 />
-                                <Button size="sm" variant="primary">
+                                <Button disabled={isLoading} size="sm" variant="primary">
                                     Save
                                 </Button>
                             </form>
