@@ -5,7 +5,7 @@ import axios from "axios";
 import qs from "query-string";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Member, MemberRole, Profile } from "@prisma/client";
 import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
 import Image from "next/image";
@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useModal } from "@/hooks/use-modal-store";
 
 interface ChatItemProps {
     id: string;
@@ -62,6 +63,7 @@ export const ChatItem = ({
     const [fileType, setFileType] = useState<string | null>(null);
     const [isEditing, setIsEditing] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+    const { onOpen } = useModal();
 
     useEffect(() => {
         const handleKeyDown = (event: any) => {
@@ -238,6 +240,10 @@ export const ChatItem = ({
                     )}
                     <ActionTooltip label="Delete message">
                         <Trash
+                        onClick={() => onOpen("deleteMessage", {
+                            apiUrl: `${socketUrl}/${id}`,
+                            query: socketQuery
+                        })}
                             className="w-4 h-4 cursor-pointer ml-auto
                                 text-zinc-500 hover:text-zinc-600
                                 dark:hover:text-zinc-300 transition"
