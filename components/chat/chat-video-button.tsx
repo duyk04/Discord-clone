@@ -20,7 +20,7 @@ export const ChatVideoButton = () => {
                 video: isVideo ? undefined : true,
             },
         }, { skipEmptyString: true });
-
+        
         router.push(url);
     }
 
