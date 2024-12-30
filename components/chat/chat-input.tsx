@@ -5,7 +5,7 @@ import axios from "axios";
 import qs from "query-string";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus } from "lucide-react";
+import { Plus, SendHorizonal } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import {
@@ -36,7 +36,7 @@ export const ChatInput = ({
     type
 }: ChatInputProps) => {
     const { onOpen } = useModal();
-    const router = useRouter(); 
+    const router = useRouter();
 
     const form = useForm<z.infer<typeof fromSchema>>({
         resolver: zodResolver(fromSchema),
@@ -72,7 +72,7 @@ export const ChatInput = ({
                     render={({ field }) => (
                         <FormItem>
                             <FormControl>
-                                <div className="relative p-4 pb-6">
+                                <div className="relative p-4 pb-6 flex">
                                     <button
                                         type="button"
                                         onClick={() => onOpen("messageFile", { apiUrl, query })}
@@ -90,14 +90,37 @@ export const ChatInput = ({
                                         placeholder={`Message ${type === "conversation" ? name : "#" + name}`}
                                         {...field}
                                     />
-                                    <div className="absolute top-7 right-8">
+                                    <div className="absolute flex items-center justify-center right-20 top-7">
                                         <EmojiPicker
                                             // onChange={(emoji) => {
                                             //     form.setValue("content", form.getValues("content") + emoji);
                                             // }}
-                                            onChange={( emoji: string ) => field.onChange(`${field.value}${emoji}`)}
+                                            onChange={(emoji: string) => field.onChange(`${field.value}${emoji}`)}
                                         />
+                                        {/* <button
+                                                type="submit"
+                                                disabled={isLoading}
+                                                className=" ml-2
+                                                            bg-indigo-500 dark:bg-indigo-500 hover:bg-indigo-600
+                                                            dark:hover:bg-indigo-600 rounded-full transition p-1 
+                                                            flex items-center justify-center"
+                                            >
+                                                <SendHorizonal className="text-white w-5 h-5" />
+                                            </button> */}
                                     </div>
+                                    <div className="ml-1">
+                                        <button
+                                            type="submit"
+                                            disabled={isLoading}
+                                            className="w-[48px] h-[48px]
+                                                            bg-indigo-500 dark:bg-indigo-500 hover:bg-indigo-600
+                                                            dark:hover:bg-indigo-600 rounded-full transition p-1 
+                                                            flex items-center justify-center"
+                                        >
+                                            <SendHorizonal className="text-white w-5 h-5" />
+                                        </button>
+                                    </div>
+
                                 </div>
                             </FormControl>
                         </FormItem>
