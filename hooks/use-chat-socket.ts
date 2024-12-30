@@ -24,9 +24,11 @@ export const useChatSocket = ({
     const { socket } = useSocket();
     const queryClient = useQueryClient();
 
+    // console.log(socket);
+
     useEffect(() => {
         if (!socket) {
-            console.warn("Socket chưa được khởi tạo!");
+            // console.warn("Socket chưa được khởi tạo!");
             return;
         }
 
