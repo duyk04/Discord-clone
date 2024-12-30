@@ -13,13 +13,19 @@ interface MemberIdPageProps {
         memberId: string;
         serverId: string;
     }>
+    searchParams: Promise<{
+        video?: boolean;
+    }>;
+
 }
 
 const MemberIdPage = async ({
-    params
+    params,
+    searchParams
 }: MemberIdPageProps) => {
     const profile = await currentProfile();
     const { memberId, serverId } = await params;
+    const { video } = await searchParams;
 
     if (!profile) {
         return <RedirectToSignIn />;
