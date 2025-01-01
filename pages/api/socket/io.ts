@@ -1,8 +1,8 @@
-import { Server as NetServer } from 'http';
+import { Server as HttpServer } from 'http';
 import { NextApiRequest } from 'next';
+import { NextApiResponseServerIo } from '@/types';
 import { Server as ServerIO } from 'socket.io';
 
-import { NextApiResponseServerIo } from '@/types';
 
 export const config = {
     api: {
@@ -13,28 +13,29 @@ export const config = {
 const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
     if (!res.socket.server.io) {
         const path = "/api/socket/io";
-        const httpServer: NetServer = res.socket.server as any;
+        const httpServer: HttpServer = res.socket.server as unknown as HttpServer ;
         const io = new ServerIO(httpServer, {
             path: path,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             addTrailingSlash: false,
         });
 
         io.on("connection", (socket) => {
             console.log("Client connected:", socket.id);
-        
+
             socket.on("customEvent", (data) => {
                 console.log("Received event from client:", data);
                 // Phát lại dữ liệu đến các client khác
                 socket.broadcast.emit("updateData", data);
             });
         });
-        
-        
+
+
         res.socket.server.io = io;
     }
     res.end();
-    
+
 }
 
 

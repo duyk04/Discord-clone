@@ -9,6 +9,7 @@ import {
 import { io as ClientIO } from "socket.io-client";
 
 type SocketContextType = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     socket: any | null;
     isConnected: boolean;
 };
@@ -31,6 +32,7 @@ export const SocketProvider = ({
     const [isConnected, setIsConnected] = useState(false);
 
     useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const socketInstance = new (ClientIO as any)(process.env.NEXT_PUBLIC_SOCKET_URL!, {
             path: "/api/socket/io",
             // transports: ["websocket"], // Chỉ cho phép sử dụng WebSocket

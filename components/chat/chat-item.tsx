@@ -63,7 +63,7 @@ export const ChatItem = ({
 }: ChatItemProps) => {
     const [fileType, setFileType] = useState<string | null>(null);
     const [isEditing, setIsEditing] = useState(false);
-    const [isDeleting, setIsDeleting] = useState(false);
+    // const [isDeleting, setIsDeleting] = useState(false);
     const { onOpen } = useModal();
     const params = useParams();
     const router = useRouter();
@@ -79,7 +79,7 @@ export const ChatItem = ({
     }
 
     useEffect(() => {
-        const handleKeyDown = (event: any) => {
+        const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === "Escape" || event.keyCode === 27) {
                 setIsEditing(false);
             }
@@ -119,7 +119,7 @@ export const ChatItem = ({
         form.reset({
             content: content
         });
-    }, [content]);
+    }, [content, form]);
 
 
     useEffect(() => {

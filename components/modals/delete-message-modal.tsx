@@ -18,7 +18,7 @@ import { useModal } from "@/hooks/use-modal-store";
 
 
 export const DeleteMessagelModal = () => {
-    const { onOpen, isOpen, onClose, type, data } = useModal();
+    const { isOpen, onClose, type, data } = useModal();
     const router = useRouter();
 
     const isModalOpen = isOpen && type === "deleteMessage";
@@ -35,7 +35,7 @@ export const DeleteMessagelModal = () => {
             });
 
             await axios.delete(url);
-          
+
             onClose();
         } catch (error) {
             console.error(error);

@@ -18,7 +18,7 @@ import { useModal } from "@/hooks/use-modal-store";
 
 
 export const DeleteChannelModal = () => {
-    const { onOpen, isOpen, onClose, type, data } = useModal();
+    const { isOpen, onClose, type, data } = useModal();
     const router = useRouter();
 
     const isModalOpen = isOpen && type === "deleteChannel";
