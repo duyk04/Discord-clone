@@ -4,11 +4,11 @@ import { NextApiResponseServerIo } from '@/types';
 import { Server as ServerIO } from 'socket.io';
 
 
-export const config = {
-    api: {
-        bodyParser: false,
-    },
-};
+// export const config = {
+//     api: {
+//         bodyParser: false,
+//     },
+// };
 
 const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
     if (!res.socket.server.io) {
@@ -16,10 +16,14 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
         const httpServer: HttpServer = res.socket.server as unknown as HttpServer ;
         const io = new ServerIO(httpServer, {
             path: path,
-            transports: ["websocket"],
-            // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // // @ts-ignore
-            // addTrailingSlash: false,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            addTrailingSlash: false,
+                cors: {
+                    origin: ["*"], // Thay đổi theo domain của bạn
+                    methods: ["GET", "POST"],
+                    credentials: true, // Cho phép gửi cookie nếu cần
+                }
         });
 
         // io.on("connection", (socket) => {
