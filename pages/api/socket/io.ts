@@ -21,15 +21,15 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
             addTrailingSlash: false,
         });
 
-        io.on("connection", (socket) => {
-            console.log("Client connected:", socket.id);
+        // io.on("connection", (socket) => {
+        //     console.log("Client connected:", socket.id);
 
-            socket.on("customEvent", (data) => {
-                console.log("Received event from client:", data);
-                // Phát lại dữ liệu đến các client khác
-                socket.broadcast.emit("updateData", data);
-            });
-        });
+        //     socket.on("customEvent", (data) => {
+        //         console.log("Received event from client:", data);
+        //         // Phát lại dữ liệu đến các client khác
+        //         socket.broadcast.emit("updateData", data);
+        //     });
+        // });
 
 
         res.socket.server.io = io;
