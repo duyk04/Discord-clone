@@ -20,9 +20,9 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
             // @ts-ignore
             addTrailingSlash: false,
                 cors: {
-                    origin: ["*"], // Thay đổi theo domain của bạn
+                    origin: ["*"],
                     methods: ["GET", "POST"],
-                    credentials: true, // Cho phép gửi cookie nếu cần
+                    credentials: true,
                 }
         });
 
