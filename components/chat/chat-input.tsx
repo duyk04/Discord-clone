@@ -20,7 +20,7 @@ import { EmojiPicker } from "@/components/emoji-picker";
 
 interface ChatInputProps {
     apiUrl: string;
-    query: Record<string, any>;
+    query: Record<string, string | number | boolean | null | undefined>;
     name: string;
     type: "conversation" | "channel";
 }
@@ -97,16 +97,6 @@ export const ChatInput = ({
                                             // }}
                                             onChange={(emoji: string) => field.onChange(`${field.value}${emoji}`)}
                                         />
-                                        {/* <button
-                                                type="submit"
-                                                disabled={isLoading}
-                                                className=" ml-2
-                                                            bg-indigo-500 dark:bg-indigo-500 hover:bg-indigo-600
-                                                            dark:hover:bg-indigo-600 rounded-full transition p-1 
-                                                            flex items-center justify-center"
-                                            >
-                                                <SendHorizonal className="text-white w-5 h-5" />
-                                            </button> */}
                                     </div>
                                     <div className="ml-1">
                                         <button

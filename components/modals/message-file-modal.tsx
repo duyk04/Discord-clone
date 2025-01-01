@@ -36,7 +36,7 @@ export const MessageFileModal = () => {
     const { isOpen, onClose, type, data } = useModal();
     const router = useRouter();
 
-    const isModalOpen = type === "messageFile";
+    const isModalOpen = isOpen && type === "messageFile";
     const { apiUrl, query } = data;
     
     const form = useForm({

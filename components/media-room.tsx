@@ -26,7 +26,7 @@ export const MediaRoom = ({
         if (!user?.firstName || !user?.fullName) return;
 
         const name = `${user.firstName}`;
-        console.log(name);
+        // console.log(name);
         (async () => {
             try {
                 const res = await fetch(`/api/livekit?room=${chatId}&username=${name}`);
