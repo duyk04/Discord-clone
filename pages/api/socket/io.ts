@@ -16,9 +16,10 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
         const httpServer: HttpServer = res.socket.server as unknown as HttpServer ;
         const io = new ServerIO(httpServer, {
             path: path,
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            addTrailingSlash: false,
+            transports: ["websocket"],
+            // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // // @ts-ignore
+            // addTrailingSlash: false,
         });
 
         // io.on("connection", (socket) => {

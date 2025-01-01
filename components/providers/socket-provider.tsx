@@ -35,7 +35,7 @@ export const SocketProvider = ({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const socketInstance = new (ClientIO as any)(process.env.NEXT_PUBLIC_SOCKET_URL!, {
             path: "/api/socket/io",
-            // transports: ["websocket"], // Chỉ cho phép sử dụng WebSocket
+            transports: ["websocket"], // Chỉ cho phép sử dụng WebSocket
         });
 
         // socketInstance.on("connect", () => {
