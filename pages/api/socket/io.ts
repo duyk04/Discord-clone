@@ -4,11 +4,11 @@ import { NextApiResponseServerIo } from '@/types';
 import { Server as ServerIO } from 'socket.io';
 
 
-// export const config = {
-//     api: {
-//         bodyParser: false,
-//     },
-// };
+export const config = {
+    api: {
+        bodyParser: false,
+    },
+};
 
 const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
     if (!res.socket.server.io) {
